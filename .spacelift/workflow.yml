@@ -1,0 +1,25 @@
+# Spacelift Custom Workflow Configuration
+# This file defines the workflow steps for Spacelift runs
+
+# Initialize Terraform
+init: terraform init -input=false
+
+# Workspace commands
+workspaceSelect: terraform workspace select $WORKSPACE_NAME
+workspaceNew: terraform workspace new $WORKSPACE_NAME
+
+# Plan changes
+plan: terraform plan -input=false -out=spacelift.plan
+
+# Show commands
+showState: terraform show -json
+showPlan: terraform show -json spacelift.plan
+
+# Get outputs
+getOutputs: terraform output -json
+
+# Apply changes (only for tracked runs)
+apply: terraform apply -input=false -auto-approve spacelift.plan
+
+# Destroy resources (only for destroy runs)
+destroy: terraform destroy -input=false -auto-approve
