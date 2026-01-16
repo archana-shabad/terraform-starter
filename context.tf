@@ -79,8 +79,10 @@ resource "spacelift_mounted_file" "context-secret-file" {
 # You can read about attaching and detaching contexts here:
 #
 # https://docs.spacelift.io/concepts/context#attaching-and-detaching
-resource "spacelift_context_attachment" "managed" {
-  context_id = spacelift_context.managed.id
-  stack_id   = spacelift_stack.managed.id
-  priority   = 0
-}
+#
+# Commented out - depends on spacelift_stack.managed which is commented out
+# resource "spacelift_context_attachment" "managed" {
+#   context_id = spacelift_context.managed.id
+#   stack_id   = spacelift_stack.managed.id
+#   priority   = 0
+# }
